@@ -9,7 +9,7 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-return [
+/*return [
     '__pattern__' => [
         'name' => '\w+',
     ],
@@ -18,4 +18,13 @@ return [
         ':name' => ['index/hello', ['method' => 'post']],
     ],
 
-];
+];*/
+
+use think\Route;
+
+    //评测首页接口
+
+Route::post('api/:version/index','ceping/:version.IndexController/index');
+
+//图片上传接口
+Route::post('api/:version/pic_upload','ceping/:version.UploadPicController/uploadPic');
