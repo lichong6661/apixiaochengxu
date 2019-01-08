@@ -98,20 +98,29 @@ class UploadService
 //            $info= $file->validate($rules)->move($path);
            $info= $file->validate($rules)->move($path,$md5_name);
 
-            if(!$info)
+            /*if(!$info)
             {
+                throw new FileException([
+                    'msg'=>$file->getError()
+                ]);
+            }*/
+
+            if($info)
+            {
+                $fileUrl=$info->getSaveName();
+
+                return [
+                    'fileUrl'=>$fileUrl,
+                    'fileRealPath'=>$info->getPathname()
+                ];
+            }else{
                 throw new FileException([
                     'msg'=>$file->getError()
                 ]);
             }
 
             // 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
-            $fileUrl=$info->getSaveName();
 
-            return [
-                'fileUrl'=>$fileUrl,
-                'fileRealPath'=>$info->getPathname()
-            ];
 
 
         }
