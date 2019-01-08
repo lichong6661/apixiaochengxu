@@ -62,7 +62,7 @@ class UploadService
                 case 'vedio':
                     $rules=[
                         'ext'=>'mp4',
-                        'size'=>200*1024*1024
+                        'size'=>300*1024*1024
                     ];
 
 
