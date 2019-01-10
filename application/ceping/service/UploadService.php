@@ -107,7 +107,7 @@ class UploadService
 
             if($info)
             {
-                $fileUrl=$info->getSaveName();
+                $fileUrl=$data_file.'/'.$info->getSaveName();
 
                 return [
                     'fileUrl'=>$fileUrl,
