@@ -12,7 +12,9 @@ namespace app\ceping\controller\v1;
 use app\ceping\controller\BaseController;
 use app\ceping\model\Informations;
 use app\ceping\validate\PageOneValidate;
+use app\ceping\validate\PageTwoValidate;
 use app\libExcep\FailException;
+use app\libExcep\FileException;
 use app\libExcep\SuccessException;
 use think\process\exception\Failed;
 
@@ -35,6 +37,7 @@ class IndexController extends BaseController
                 $this->saveOne();
                 break;
             case 'two':
+                $this->saveTwo();
                 break;
             default:
                 return json(['msg'=>'无任何处理']);
@@ -57,5 +60,25 @@ class IndexController extends BaseController
             throw new FailException();
         }
 
+    }
+
+    private function saveTwo()
+    {
+        (new PageTwoValidate())->goCheck();
+
+        $pageTwoValidate=new PageTwoValidate();
+        $pageTwoValidate->goCheck();
+
+        $user_id=input('post.user_id');
+
+        $data=input('post.');
+
+        $res=Informations::update($data,['id'=>$user_id],true);
+        if(!$res)
+        {
+            throw new FileException();
+        }
+
+        throw new SuccessException();
     }
 }
