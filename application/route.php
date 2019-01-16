@@ -24,7 +24,8 @@ use think\Route;
 
     //评测首页接口
 
-Route::post('api/:version/index','ceping/:version.IndexController/index','OPTIONS');
+//Route::post('api/:version/index','ceping/:version.IndexController/index','OPTIONS');
+Route::rule('api/:version/index','ceping/:version.IndexController/index','OPTIONS|POST');
 
 //图片上传接口
 Route::post('api/:version/pic_upload','ceping/:version.UploadPicController/uploadPic');
