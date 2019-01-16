@@ -28,5 +28,6 @@ use think\Route;
 Route::rule('api/:version/index','ceping/:version.IndexController/index','OPTIONS|POST');
 
 //图片上传接口
-Route::post('api/:version/pic_upload','ceping/:version.UploadPicController/uploadPic');
+//Route::post('api/:version/pic_upload','ceping/:version.UploadPicController/uploadPic');
+Route::post('api/:version/pic_upload','ceping/:version.UploadPicController/uploadPic','OPTIONS|POST');
 
