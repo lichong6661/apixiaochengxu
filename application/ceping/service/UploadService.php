@@ -125,4 +125,101 @@ class UploadService
 
         }
     }
+
+   //上传剪裁后的图片 是一串base64加密字符串
+    //未测试，未启用
+    public static function uploadBasePic($base64String='',$target)
+    {
+
+        $request=Request::instance();
+
+        if(!$target || !$base64String)
+        {
+            throw new FileException([
+                'msg'=>'文件target错误！'
+            ]);
+        }
+
+        $allowed_extend=['jpg','png','jpeg'];
+        $r='';
+        $image='';
+        //$rootPath=RootPath::getPath();
+        //$filePathPin1=$rootPath.'/web'.\Yii::$app->params['filetaget']['book'].'/';
+        $filePathPin1=ROOT_PATH.'public'.Config::get('uploadPath.'.$target).'/';
+
+        $dataName=date('Ymd');
+
+        try{
+
+            if(!file_exists($filePathPin1.$dataName))
+            {
+
+                mkdir($filePathPin1.$dataName,0777);
+                chmod($filePathPin1.$dataName,0777);
+            }
+        } catch(Exception $e){
+            throw new FileException([
+                'msg'=>$e->getMessage()
+            ]);
+        }
+
+        //文件名字
+
+        // 文件的dir
+        $fileDir=md5(file_get_contents($base64String));
+
+        //文件的type
+        $typeBegin=strpos($base64String,'/')+1;
+        $typeEnd=strpos($base64String,';');
+        $typeCount=$typeEnd-$typeBegin;
+        $pathExtension=substr($base64String,$typeBegin,$typeCount);
+        if(!in_array( $pathExtension ,$allowed_extend) )
+        {
+            throw new FileException([
+                'msg'=>'格式错误'
+            ]);
+        }
+
+
+        /*$pathExtensionFlag=explode('.',$fileName);
+        $pathExtension=strtolower( end($pathExtensionFlag));*/
+
+        //文件全名
+        $fileNameLast=$fileDir.'.'.$pathExtension;
+
+        //完整路径
+        $filePathLast=$filePathPin1.$dataName.'/'.$fileNameLast;
+        $filePathLast=str_replace('\\','/',$filePathLast);
+        // var_dump($filePathLast);exit;
+
+        if (strstr($base64String,",")) {
+            $image = explode(',', $base64String);
+            $image = $image[1];
+
+
+            if (is_uploaded_file($image)) {
+                move_uploaded_file($image, $filePathLast);
+            } else {
+                $r = file_put_contents($filePathLast, base64_decode($image));
+            }
+        }else{
+            throw new FileException([
+                'msg'=>'base64格式错误'
+            ]);
+        }
+
+        if($r)
+        {
+            return [
+                'fileUrl'=>$dataName.'/'.$fileNameLast,
+                'fileRealPath'=>$filePathLast
+            ];
+
+        }else{
+            throw new FileException([
+                'msg'=>'上传失败'
+            ]);
+
+        }
+    }
 }
