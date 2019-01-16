@@ -59,8 +59,8 @@ class ExceptionHandler extends Handle
 
         return json($data,$this->code,[
             'Access-Control-Allow-Origin'=>'*',
-            'Access-Control-Allow-Methods'=>'GET, POST, OPTIONS, DELETE',
-            'Access-Control-Allow-Headers'=>'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type, Accept-Language, Origin, Accept-Encoding'
+            //'Access-Control-Allow-Methods'=>'GET, POST, OPTIONS, DELETE',
+            //'Access-Control-Allow-Headers'=>'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type, Accept-Language, Origin, Accept-Encoding'
         ]);
     }
 
