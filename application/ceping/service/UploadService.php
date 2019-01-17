@@ -50,7 +50,7 @@ class UploadService
             switch($type){
                 case 'pic':
                     $rules=[
-                        //'ext'=>'jpeg,jpg,png',
+                        'ext'=>'jpeg,jpg,png',
                         'size'=>5*1024*1024
                     ];
 
