@@ -44,8 +44,7 @@ class UploadService
 
             $data_file=date('Ymd');
 
-            $tmp_name=$file->getInfo()['tmp_name'];
-            $md5_name=md5(file_get_contents($tmp_name));
+
 
             //区分图片还是视频
             switch($type){
@@ -78,7 +77,6 @@ class UploadService
             }
 
 
-
             try{
                 if(!file_exists($path))
                 {
@@ -91,7 +89,8 @@ class UploadService
                 ]);
             }
 
-
+            $tmp_name=$file->getInfo()['tmp_name'];
+            $md5_name=md5(file_get_contents($tmp_name));
 
 
 //            $info= $file->rule('sha1')->validate($rules)->move($path);
