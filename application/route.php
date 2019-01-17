@@ -29,5 +29,5 @@ Route::rule('api/:version/index','ceping/:version.IndexController/index','POST')
 
 //图片上传接口
 //Route::post('api/:version/pic_upload','ceping/:version.UploadPicController/uploadPic');
-Route::rule('api/:version/pic_upload','ceping/:version.UploadPicController/uploadPic','OPTIONS|POST');
+Route::rule('api/:version/pic_upload','ceping/:version.UploadPicController/uploadPic','POST');
 
