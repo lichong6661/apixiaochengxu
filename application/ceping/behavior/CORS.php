@@ -11,6 +11,7 @@ namespace app\ceping\behavior;
 
 class CORS
 {
+    //跨域问题
     public function appInit(&$params)
     {
         header("Access-Control-Allow-Origin: *");

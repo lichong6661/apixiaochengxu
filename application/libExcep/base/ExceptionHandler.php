@@ -57,11 +57,7 @@ class ExceptionHandler extends Handle
             'data'=>$this->datas
         ];
 
-        return json($data,$this->code,[
-            //'Access-Control-Allow-Origin'=>'*',
-            //'Access-Control-Allow-Methods'=>'GET, POST, PUT,DELETE,OPTIONS,PATCH',
-            //'Access-Control-Allow-Headers'=>'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-        ]);
+        return json($data,$this->code);
     }
 
     //自定义写入日志
